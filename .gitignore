@@ -1,6 +1,14 @@
 # Python
 **/__pycache__
 **/.ipynb_checkpoints
+# local Python
+.python-version
 
 # sqlite
 *.db
+
+# env
+.env
+
+# local backup
+backup/**

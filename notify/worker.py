@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 import sys
 import os
 
+from dotenv import load_dotenv
 import paho.mqtt.client as mqtt
 
 sys.path.append('/home/pi/ogidata/helper')
@@ -13,11 +14,13 @@ sys.path.append('/home/pi/ogidata/helper')
 import push
 push.push('ogihome', 'debug', 'start watch')
 
+
+load_dotenv()
+
 # MQTT Broker
-MQTT_HOST = "192.168.11.105"       # brokerのアドレス
-#MQTT_HOST = "localhost"       # brokerのアドレス
-MQTT_PORT = 1883                # brokerのport
-MQTT_KEEP_ALIVE = 60            # keep alive
+MQTT_HOST = os.getenv('MQTT_HOST')
+MQTT_PORT = int(os.getenv('MQTT_PORT'))
+MQTT_KEEP_ALIVE = int(os.getenv('MQTT_KEEP_ALIVE'))
 
 data = {
         'co2': [],

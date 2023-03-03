@@ -1,0 +1,17 @@
+set -eux
+
+HOSTNAME=rasp2
+HOST_OGIHOME_PATH=ogihome
+BACKUP_PATH=backup
+
+TIMESTAMP=$(date "+%Y%m%d%H%M%S")
+FILENAME=backup_${TIMESTAMP}.csv
+
+echo $TIMESTAMP
+echo $FILENAME
+
+mkdir -p $BACKUP_PATH
+
+ssh $HOSTNAME "cd $HOST_OGIHOME_PATH;python3 logger/export.py $FILENAME"
+scp $HOSTNAME:$HOST_OGIHOME_PATH/$FILENAME $BACKUP_PATH/
+ssh $HOSTNAME "cd $HOST_OGIHOME_PATH;rm $FILENAME"
